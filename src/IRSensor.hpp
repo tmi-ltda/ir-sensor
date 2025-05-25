@@ -6,13 +6,14 @@
 class IRSensor {
   private:
     uint8_t _pin;
+    int8_t _weight;
     const char* _name;
   
   public:
-    IRSensor(uint8_t pin, const char* name) : _pin(pin), _name(name) {}
+    IRSensor(uint8_t pin, int8_t weight, const char* name) : _pin(pin), _weight(weight), _name(name) {}
 
-    bool read() {
-      bool value = digitalRead(_pin);
+    int8_t read() {
+      int8_t value = digitalRead(_pin) * _weight;
 
       Serial.print("Leitura do sensor - ");
       Serial.print(_name);
