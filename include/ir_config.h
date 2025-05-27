@@ -7,3 +7,8 @@ typedef struct {
   const char* name;
   int8_t weight;
 } ir_sensor_config_t;
+
+enum IR_MODES {
+  DIGITAL_SENSOR,
+  ANALOG_SENSOR
+};
