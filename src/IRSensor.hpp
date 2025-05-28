@@ -10,7 +10,7 @@ class IRSensor {
     int8_t _weight;
     const char* _name;
     uint16_t _threshold = 0;
-    uint32_t _interval = 3000, _last_read = 0;
+    uint32_t _interval = 3000, _last_print = 0;
   
   public:
     IRSensor() : _pin(0), _weight(0), _name("") {}
@@ -38,7 +38,7 @@ class IRSensor {
         Serial.print(": ");
         Serial.println(value);  
 
-        _last_read = millis();
+        _last_print = millis();
       }
 
       return value;
