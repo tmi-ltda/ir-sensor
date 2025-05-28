@@ -21,26 +21,25 @@ class IRSensor {
 
     int16_t read(IR_MODES mode) {
       int16_t value = 0;
+      int16_t analogValue = 0;
 
       if (mode == DIGITAL_SENSOR) value = digitalRead(_pin);
       else {
-        value = analogRead(_pin);
+        analogValue = analogRead(_pin);
 
-        if (value >= _threshold) value = 1;
+        if (analogValue >= _threshold) value = 1;
         else value = 0;
       }
 
-      value *= _weight;
-
       if (millis() - _last_print >= _interval) {
-        Serial.print("Leitura do sensor - ");
-        Serial.print(_name);
-        Serial.print(": ");
-        Serial.println(value);  
+        Serial.printf("Limiar do sensor: %d\n", _threshold);
+        Serial.printf("Leitura do sensor - %s: %d (%d)\n", _name, mode == DIGITAL_SENSOR ? value : analogValue, value * _weight);
 
         _last_print = millis();
       }
 
+      value *= _weight;
+      
       return value;
     }
 
